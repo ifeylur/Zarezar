@@ -51,6 +51,10 @@ app.get('/', (req, res) => {
   res.json({ message: 'Zarezar API is running' });
 });
 
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Test route working', timestamp: new Date() });
+});
+
 const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV !== 'production') {
