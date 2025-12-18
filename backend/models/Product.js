@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ['face scrub', 'face mask']
+    enum: ['face scrub', 'face mask','Skincare', 'Makeup', 'Others', 'bodycare', 'haircare']
   },
   seoDescription: {
     type: String,
