@@ -28,7 +28,7 @@ const UserList = () => {
   const handleDelete = async (id, userName) => {
     if (window.confirm(`Are you sure you want to delete user "${userName}"? This action cannot be undone.`)) {
       try {
-        await axios.delete(`${API_URL}/api/users/${id}`);
+        await axios.delete(`${API_URL}/users/${id}`);
         fetchUsers();
         alert('User deleted successfully');
       } catch (error) {
