@@ -59,7 +59,7 @@ const EditProduct = () => {
         ? formData.ingredients.split(',').map(i => i.trim()).filter(i => i)
         : [];
       
-      const response = await axios.post('${API_URL}/api/ai/generate', {
+      const response = await axios.post('${API_URL}/ai/generate', {
         productName: formData.name,
         keywords: keywords,
         category: formData.category,
@@ -87,7 +87,7 @@ const EditProduct = () => {
         stock: Number(formData.stock),
         ingredients: formData.ingredients.split(',').map(i => i.trim()).filter(i => i)
       };
-      await axios.put(`${API_URL}/api/products/${id}`, productData);
+      await axios.put(`${API_URL}/products/${id}`, productData);
       navigate('/admin/products');
     } catch (error) {
       console.error('Error updating product:', error);

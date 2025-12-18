@@ -93,7 +93,7 @@ const EditUser = () => {
         updateData.password = formData.password;
       }
 
-      await axios.put(`${API_URL}/api/users/${id}`, updateData);
+      await axios.put(`${API_URL}/users/${id}`, updateData);
       alert('User updated successfully!');
       navigate('/admin/users');
     } catch (error) {

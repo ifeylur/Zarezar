@@ -15,7 +15,7 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('${API_URL}/users');
+      const response = await axios.get(`${API_URL}/users`);
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -44,7 +44,7 @@ const UserList = () => {
     
     if (window.confirm(`Are you sure you want to ${action} for "${userName}"?`)) {
       try {
-        await axios.put(`${API_URL}/api/users/${id}`, {
+        await axios.put(`${API_URL}/users/${id}`, {
           isAdmin: newStatus
         });
         fetchUsers();

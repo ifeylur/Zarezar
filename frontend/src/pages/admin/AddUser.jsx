@@ -59,7 +59,7 @@ const AddUser = () => {
         isAdmin: formData.isAdmin
       };
 
-      await axios.post('${API_URL}/api/users', userData);
+      await axios.post(`${API_URL}/users`, userData);
       alert('User created successfully!');
       navigate('/admin/users');
     } catch (error) {
