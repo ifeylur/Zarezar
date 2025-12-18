@@ -26,9 +26,9 @@ const productRoutes = require('./routes/productRoutes');
 const aiRoutes = require('./routes/aiRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+app.use('/api', userRoutes);           // Changed this line
 app.use('/api/products', productRoutes);
 app.use('/api/ai', aiRoutes);
-app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
   res.json({ 
