@@ -23,7 +23,7 @@ const AddProduct = () => {
 
   const handleGenerateDescription = async () => {
     try {
-      const response = await axios.post('${API_URL}/api/ai/generate-description', {
+      const response = await axios.post('${API_URL}/ai/generate-description', {
         productName: formData.name,
         category: formData.category,
         skinType: formData.skinType,
@@ -46,7 +46,7 @@ const AddProduct = () => {
         ? formData.ingredients.split(',').map(i => i.trim()).filter(i => i)
         : [];
       
-      const response = await axios.post('${API_URL}/api/ai/generate', {
+      const response = await axios.post('${API_URL}/ai/generate', {
         productName: formData.name,
         keywords: keywords,
         category: formData.category,
@@ -74,7 +74,7 @@ const AddProduct = () => {
         stock: Number(formData.stock),
         ingredients: formData.ingredients.split(',').map(i => i.trim()).filter(i => i)
       };
-      await axios.post('${API_URL}/api/products', productData);
+      await axios.post(`${API_URL}/products`, productData);
       navigate('/admin/products');
     } catch (error) {
       console.error('Error creating product:', error);
