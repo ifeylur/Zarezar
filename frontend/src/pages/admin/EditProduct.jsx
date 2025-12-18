@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/products/${id}`);
+        const response = await axios.get(`${API_URL}/api/products/${id}`);
         const product = response.data;
         setFormData({
           name: product.name,
@@ -58,7 +59,7 @@ const EditProduct = () => {
         ? formData.ingredients.split(',').map(i => i.trim()).filter(i => i)
         : [];
       
-      const response = await axios.post('http://localhost:5000/api/ai/generate', {
+      const response = await axios.post('${API_URL}/api/ai/generate', {
         productName: formData.name,
         keywords: keywords,
         category: formData.category,
@@ -86,7 +87,7 @@ const EditProduct = () => {
         stock: Number(formData.stock),
         ingredients: formData.ingredients.split(',').map(i => i.trim()).filter(i => i)
       };
-      await axios.put(`http://localhost:5000/api/products/${id}`, productData);
+      await axios.put(`${API_URL}/api/products/${id}`, productData);
       navigate('/admin/products');
     } catch (error) {
       console.error('Error updating product:', error);

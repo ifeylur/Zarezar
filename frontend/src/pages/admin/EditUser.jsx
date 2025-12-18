@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const EditUser = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const EditUser = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/${id}`);
+      const response = await axios.get(`${API_URL}/api/users/${id}`);
       const user = response.data;
       setFormData({
         name: user.name || '',
@@ -92,7 +93,7 @@ const EditUser = () => {
         updateData.password = formData.password;
       }
 
-      await axios.put(`http://localhost:5000/api/users/${id}`, updateData);
+      await axios.put(`${API_URL}/api/users/${id}`, updateData);
       alert('User updated successfully!');
       navigate('/admin/users');
     } catch (error) {

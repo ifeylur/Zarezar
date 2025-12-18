@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const AddUser = () => {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const AddUser = () => {
         isAdmin: formData.isAdmin
       };
 
-      await axios.post('http://localhost:5000/api/users', userData);
+      await axios.post('${API_URL}/api/users', userData);
       alert('User created successfully!');
       navigate('/admin/users');
     } catch (error) {

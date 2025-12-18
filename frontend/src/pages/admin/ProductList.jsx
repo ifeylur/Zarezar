@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const ProductList = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products');
+      const response = await axios.get('${API_URL}/api/products');
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -24,7 +25,7 @@ const ProductList = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/products/${id}`);
+        await axios.delete(`${API_URL}/api/products/${id}`);
         fetchProducts();
       } catch (error) {
         console.error('Error deleting product:', error);

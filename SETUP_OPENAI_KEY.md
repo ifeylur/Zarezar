@@ -54,7 +54,7 @@ Then test it:
 
 You can also test if the key is loaded by visiting:
 ```
-http://localhost:5000/api/test/test-openai-key
+${API_URL}/api/test/test-openai-key
 ```
 
 This will show you:

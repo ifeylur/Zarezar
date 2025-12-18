@@ -51,7 +51,7 @@ npm run dev
 
 Visit this URL in your browser to check if the API key is loaded:
 ```
-http://localhost:5000/api/test/test-openai-key
+${API_URL}/api/test/test-openai-key
 ```
 
 You should see:
