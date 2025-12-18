@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const cors = require('cors');
+const cors = require('cors');  // ✅ Keep only this one
 const connectDB = require('./config/db');
 const productRoutes = require('./routes/productRoutes');
 const aiRoutes = require('./routes/aiRoutes');
@@ -24,11 +24,11 @@ if (process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY !== 'your_openai_ap
 }
 
 const app = express();
-const cors = require('cors');
 
+// CORS - Must be before routes
 app.use(cors({
-  origin: '*',  // Allow all origins temporarily
-  credentials: false,  // Set to false when using '*'
+  origin: ['http://localhost:3000', 'https://zarezar-kul3.vercel.app'],
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
@@ -58,4 +58,3 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = app;
-
