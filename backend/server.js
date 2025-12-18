@@ -24,11 +24,16 @@ if (process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY !== 'your_openai_ap
 }
 
 const app = express();
+const cors = require('cors');
+
 app.use(cors({
-  origin: true,
+  origin: [
+    'http://localhost:3000',
+    'https://zarezar-kul3.vercel.app'  // Fixed URL
+  ],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.options('*', cors());
