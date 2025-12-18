@@ -9,11 +9,11 @@ const {
 } = require('../controllers/productController');
 
 // Admin CRUD Routes
-router.post('/products', createProduct);
-router.get('/products', getAllProducts);
-router.get('/products/:id', getProductById);
-router.put('/products/:id', updateProduct);
-router.delete('/products/:id', deleteProduct);
+router.post('/', createProduct);
+router.get('/', getAllProducts);  // This is correct now
+router.get('/:id', getProductById);
+router.put('/:id', updateProduct);
+router.delete('/:id', deleteProduct);
 
 module.exports = router;
 
