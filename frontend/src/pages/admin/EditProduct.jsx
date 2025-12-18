@@ -22,7 +22,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/products/${id}`);
+        const response = await axios.get(`${API_URL}/products/${id}`);
         const product = response.data;
         setFormData({
           name: product.name,
