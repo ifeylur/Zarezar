@@ -27,13 +27,10 @@ const app = express();
 const cors = require('cors');
 
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://zarezar-kul3.vercel.app'  // Fixed URL
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: '*',  // Allow all origins temporarily
+  credentials: false,  // Set to false when using '*'
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 app.options('*', cors());
