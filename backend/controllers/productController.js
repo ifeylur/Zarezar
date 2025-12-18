@@ -3,49 +3,26 @@ const Product = require('../models/Product');
 // Create Product
 const createProduct = async (req, res) => {
   try {
+    console.log('📦 Creating product:', req.body);
     const product = new Product(req.body);
     await product.save();
+    console.log('✅ Product created:', product._id);
     res.status(201).json(product);
   } catch (error) {
+    console.error('❌ Error creating product:', error.message);
     res.status(400).json({ error: error.message });
   }
 };
 
-// Get All Products with Filters
+// Get All Products
 const getAllProducts = async (req, res) => {
   try {
-    const { skinType, category, minPrice, maxPrice, search, ingredient } = req.query;
-    
-    let query = {};
-    
-    if (skinType) {
-      query.skinType = skinType;
-    }
-    
-    if (category) {
-      query.category = category;
-    }
-    
-    if (minPrice || maxPrice) {
-      query.price = {};
-      if (minPrice) query.price.$gte = Number(minPrice);
-      if (maxPrice) query.price.$lte = Number(maxPrice);
-    }
-    
-    if (search) {
-      query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } }
-      ];
-    }
-    
-    if (ingredient) {
-      query.ingredients = { $in: [new RegExp(ingredient, 'i')] };
-    }
-    
-    const products = await Product.find(query).sort({ createdAt: -1 });
+    console.log('📦 Fetching all products...');
+    const products = await Product.find({}).sort({ createdAt: -1 });
+    console.log(`✅ Found ${products.length} products`);
     res.json(products);
   } catch (error) {
+    console.error('❌ Error fetching products:', error.message);
     res.status(500).json({ error: error.message });
   }
 };
@@ -100,4 +77,3 @@ module.exports = {
   updateProduct,
   deleteProduct
 };
-
