@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { API_URL } from '../config/api';
+import { API_URL } from '../../config/api';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);

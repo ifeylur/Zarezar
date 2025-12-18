@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { API_URL } from '../config/api';
-import { useParams, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../config/api';import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
