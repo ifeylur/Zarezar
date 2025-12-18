@@ -24,14 +24,17 @@ if (process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY !== 'your_openai_ap
 }
 
 const app = express();
+app.options('*', cors()); // Handle preflight requests
 
 // Middleware
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'zarezar-kul3-4j6qac71d-feylurs-projects.vercel.app'
+    'https://zarezar-kul3-4j6qac71d-feylurs-projects.vercel.app'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
