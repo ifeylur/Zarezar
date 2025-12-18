@@ -29,8 +29,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://your-app.vercel.app',
-    'https://your-custom-domain.com'
+    'zarezar-kul3-4j6qac71d-feylurs-projects.vercel.app'
   ],
   credentials: true
 }));
@@ -53,7 +52,9 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+module.exports = app;
 
