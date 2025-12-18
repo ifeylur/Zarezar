@@ -44,7 +44,7 @@ const userRoutes = require('./routes/userRoutes');
 // Mount Routes
 app.use('/api', userRoutes);
 app.use('/api', productRoutes);
-app.use('/api', aiRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Health check
 app.get('/', (req, res) => {
