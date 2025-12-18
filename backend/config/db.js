@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
+  // Skip if already connected
+  if (mongoose.connection.readyState >= 1) {
+    return;
+  }
+
   try {
-    const mongoURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/zarezar';
+    const mongoURI = process.env.MONGO_URI;
     
     const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
@@ -12,8 +17,8 @@ const connectDB = async () => {
     console.log(`MongoDB Connected: ${conn.connection.host}`);
     console.log(`Database: ${conn.connection.name}`);
   } catch (error) {
-    console.error(`Error: ${error.message}`);
-    process.exit(1);
+    console.error(`MongoDB Error: ${error.message}`);
+    throw error; // Don't use process.exit in serverless
   }
 };
 
