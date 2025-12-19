@@ -192,8 +192,14 @@ const AddProduct = () => {
                   onFocus={(e) => e.target.style.borderColor = '#667eea'}
                   onBlur={(e) => e.target.style.borderColor = '#e0e0e0'}
                 >
+                  <option value="">Select Category</option>
                   <option value="face scrub">Face Scrub</option>
                   <option value="face mask">Face Mask</option>
+                  <option value="Skincare">Skincare</option>
+                  <option value="Makeup">Makeup</option>
+                  <option value="bodycare">Bodycare</option>
+                  <option value="haircare">Haircare</option>
+                  <option value="Others">Others</option>
                 </select>
               </div>
 
