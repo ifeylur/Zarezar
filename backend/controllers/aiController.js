@@ -233,35 +233,22 @@ Write only the description text, no additional formatting or labels.`;
 const generateFallbackDescription = async (req, res) => {
   try {
     const { productName, keywords, category, skinType } = req.body;
+    const isSkincare = ['face scrub', 'face mask', 'skincare', 'bodycare'].includes(category?.toLowerCase()) && skinType !== 'None';
     
-    // Handle keywords - ensure it's an array
-    let keywordsArray = [];
-    if (keywords) {
-      if (Array.isArray(keywords)) {
-        keywordsArray = keywords.filter(k => k && k.trim() !== '');
-      } else if (typeof keywords === 'string') {
-        keywordsArray = keywords.split(',').map(k => k.trim()).filter(k => k !== '');
-      }
-    }
-    
-    // Build keywords string
-    const keywordsText = keywordsArray.length > 0 
-      ? keywordsArray.join(', ') 
-      : 'natural, organic, premium skincare';
-    
-    // Generate hashtags
-    const hashtags = generateHashtags(productName, category, skinType, keywordsArray);
-    const hashtagsText = hashtags.join(' ');
-    
-    // Fallback SEO-optimized description with hashtags
-    const seoDescription = `A premium organic ${productName} enriched with natural ingredients including ${keywordsText}. This luxurious skincare product is specially crafted to deliver visible results, leaving your skin feeling refreshed, rejuvenated, and radiant. Perfect for your daily skincare routine, this carefully formulated product deeply nourishes and revitalizes your complexion. Experience the transformative power of nature with our premium ${productName} that combines the finest ingredients for optimal skin health and beauty.
+    let keywordsArray = Array.isArray(keywords) ? keywords : (keywords?.split(',').map(k => k.trim()) || []);
+    const keywordsText = keywordsArray.length > 0 ? keywordsArray.join(', ') : 'premium ingredients';
+    const hashtagsText = generateHashtags(productName, category, skinType, keywordsArray).join(' ');
 
-${hashtagsText}`;
-    
+    // Dynamic text based on product type
+    const mainText = isSkincare 
+      ? `This luxurious skincare product is specially crafted to deliver visible results, leaving your skin feeling refreshed, rejuvenated, and radiant. Perfect for your daily skincare routine, it deeply nourishes your complexion.`
+      : `This premium ${category || 'product'} is formulated with high-quality ingredients to ensure optimal results. Designed for daily use, it provides the reliability and performance you expect from a luxury brand.`;
+
+    const seoDescription = `${productName}: A premium choice enriched with ${keywordsText}. ${mainText} Experience the transformative power of quality with our carefully formulated ${productName}.\n\n${hashtagsText}`;
+
     res.json({ description: seoDescription });
   } catch (error) {
-    console.error('Error in fallback generate function:', error);
-    res.status(500).json({ error: error.message || 'Internal server error' });
+    res.status(500).json({ error: error.message });
   }
 };
 
