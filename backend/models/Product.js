@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema({
   skinType: {
     type: String,
     required: true,
-    enum: ['Oily', 'Dry', 'Combination', 'Sensitive', 'Normal', 'All']
+    enum: ['Oily', 'Dry', 'Combination', 'Sensitive', 'Normal', 'All','none']
   },
   ingredients: {
     type: [String],

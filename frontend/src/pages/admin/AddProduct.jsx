@@ -232,6 +232,7 @@ const AddProduct = () => {
                   onFocus={(e) => e.target.style.borderColor = '#667eea'}
                   onBlur={(e) => e.target.style.borderColor = '#e0e0e0'}
                 >
+                  <option value="None">None (General Product)</option> {/* New Option */}
                   <option value="Oily">Oily</option>
                   <option value="Dry">Dry</option>
                   <option value="Combination">Combination</option>

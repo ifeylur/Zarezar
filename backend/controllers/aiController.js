@@ -29,6 +29,23 @@ const generateDescription = async (req, res) => {
 // Generate hashtags from product information
 const generateHashtags = (productName, category, skinType, keywordsArray) => {
   const hashtags = [];
+
+  const isSkincare = ['face scrub', 'face mask', 'Skincare', 'bodycare'].includes(category?.toLowerCase());
+
+if (isSkincare) {
+    hashtags.push('#skincare');
+    hashtags.push('#beauty');
+    hashtags.push('#premiumskincare');
+    hashtags.push('#glowingskin');
+} else {
+    hashtags.push('#premium');
+    hashtags.push('#quality');
+    // Add specific ones for toothpaste
+    if (category?.toLowerCase() === 'others' || productName.toLowerCase().includes('toothpaste')) {
+        hashtags.push('#hygiene');
+        hashtags.push('#health');
+    }
+}
   
   // Base hashtags from product name
   const productNameWords = productName.toLowerCase().split(' ').filter(w => w.length > 2);
@@ -140,11 +157,11 @@ const generate = async (req, res) => {
       : 'natural, organic, premium skincare ingredients';
     
     // Create prompt for ChatGPT
-    const prompt = `Write a compelling, SEO-optimized product description for a skincare product with the following details:
+    const prompt = `Write a compelling, SEO-optimized product description for the following product:
 
 Product Name: ${productName}
-Category: ${category || 'skincare product'}
-Skin Type: ${skinType && skinType !== 'All' ? skinType : 'all skin types'}
+Category: ${category || 'General'}
+${isSkincare ? `Skin Type: ${skinType}` : ''} 
 Key Ingredients/Keywords: ${keywordsText}
 
 Requirements:
@@ -164,7 +181,8 @@ Write only the description text, no additional formatting or labels.`;
       messages: [
         {
           role: "system",
-          content: "You are a professional SEO copywriter specializing in skincare and beauty products. Write compelling, SEO-optimized product descriptions that are engaging and persuasive."
+          // Change the system content to this:
+          content: "You are a professional SEO copywriter. Write compelling, SEO-optimized product descriptions. If the category is skincare, focus on skin benefits. If the category is anything else (like toothpaste or hair), focus on the specific benefits of that category."
         },
         {
           role: "user",

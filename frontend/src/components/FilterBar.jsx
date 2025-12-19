@@ -91,6 +91,7 @@ const FilterBar = ({ onFilterChange }) => {
           onFocus={(e) => e.target.style.borderColor = '#667eea'}
           onBlur={(e) => e.target.style.borderColor = '#e0e0e0'}
         >
+          <option value="None">None (General Product)</option> {/* New Option */}
           <option value="">All Skin Types</option>
           <option value="Oily">Oily</option>
           <option value="Dry">Dry</option>
